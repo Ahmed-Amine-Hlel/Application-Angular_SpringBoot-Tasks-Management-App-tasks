@@ -1,0 +1,87 @@
+<div class="container mt-4">
+  <ng-container *ngIf="isFormLoading; else displayForm">
+    <app-spinner [message]="'Loading form...'"></app-spinner>
+  </ng-container>
+  <ng-template #displayForm>
+    <ng-container *ngIf="isError; else displayErros">
+      <p>An error has occured fetching the specified robot!</p>
+    </ng-container>
+    <ng-template #displayErros>
+      <h2 class="mb-4">
+        {{ isNewForm ? "Add a new Robot" : "Edit Robot" }}
+      </h2>
+      <form class="form" (ngSubmit)="onSubmit(myForm)" #myForm="ngForm">
+        <div class="form-group">
+          <label for="robotName">Robot Name: </label>
+          <input
+            type="text"
+            [(ngModel)]="user.robotName"
+            name="robotName"
+            id="robotName"
+            class="form-control col-4"
+          />
+        </div>
+        <div class="form-group">
+          <label for="maker">Robot Maker: </label>
+          <input
+            type="text"
+            [(ngModel)]="user.maker"
+            name="maker"
+            id="maker"
+            class="form-control col-4"
+          />
+        </div>
+        <div class="form-group">
+          <label for="price">Price: </label>
+          <input
+            type="text"
+            [(ngModel)]="user.price"
+            name="price"
+            id="price"
+            autocomplete="username"
+            class="form-control col-4"
+          />
+        </div>
+
+        <div class="form-group">
+          <mat-label for="password">Reference: </mat-label>
+
+          <sub>
+            <i class="material-icons" matSuffix (click)="hide = !hide">
+              {{ hide ? "visibility" : "visibility_off" }}
+            </i>
+          </sub>
+
+          <div class="input-icons">
+            <br />
+            <input
+              type="password"
+              [type]="hide ? 'password' : 'text'"
+              [(ngModel)]="user.password"
+              name="password"
+              id="password"
+              autocomplete="current-password"
+              class="input-field col-4"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="createdAt">Creation date: </label>
+          <input
+            type="date"
+            [ngModel]="user.createdAt | date: 'yyyy-MM-dd'"
+            (ngModelChange)="user.createdAt = $event"
+            name="createdAt"
+            id="createdAt"
+            class="form-control col-4"
+          />
+        </div>
+
+        <button type="submit" class="btn-custom">
+          {{ isNewForm ? "Add Robot" : "Save changes" }}
+        </button>
+      </form>
+    </ng-template>
+  </ng-template>
+</div>

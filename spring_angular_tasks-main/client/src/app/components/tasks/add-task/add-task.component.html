@@ -1,0 +1,13 @@
+<form class="form mb-2" (ngSubmit)="onSubmit()">
+  <input
+    type="text"
+    name="task.title"
+    [(ngModel)]="task.title"
+    placeholder="what can the Robot do !"
+    maxlength="100"
+  />
+  <button type="submit" class="btn-custom">
+    <i class="fa fa-plus"></i> Add Task
+    <i class="fa fa-android" style="font-size: 25px"></i>
+  </button>
+</form>
